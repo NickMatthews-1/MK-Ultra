@@ -13,6 +13,23 @@ async def on_ready():
         print(f"Synced {len(synced)} command(s)")
     except Exception as e:
         print (e)
+    ### This section looks for the amount of servers the
+    ### bot is in and displays it as a status message
+    servers = len(bot.guilds)
+    members = 0
+    for guild in bot.guilds:
+        members += guild.member_count - 1
+
+    await bot.change_presence(activity = discord.Activity(
+        type = discord.ActivityType.watching,
+        name = f'{servers} servers and {members} members' ### This shows the servers and members
+    ))
+
+
+@bot.command()
+async def server_info(ctx):
+    for guild in client.guilds:
+        print(guild.name) # prints all server's names
 
 @bot.tree.command(name="hello")
 async def hello(interaction: discord.Interaction):
@@ -30,6 +47,6 @@ async def hello(interaction: discord.Interaction):
 @bot.command()
 async def info(ctx):
 
-    await ctx.send(ctx.guild)    
-
+    await ctx.send(ctx.guild)
+    
 bot.run('INSERT_BOT_TOKEN_HERE')
