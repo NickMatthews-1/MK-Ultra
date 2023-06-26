@@ -23,6 +23,10 @@ async def hello(interaction: discord.Interaction):
 async def say(interaction: discord.Interaction, thing_to_say: str):
     await interaction.response.send_message(f"{interaction.user.name} said: `{thing_to_say}`")
 
+@bot.tree.command(name="isputindead")
+async def hello(interaction: discord.Interaction):
+    await interaction.response.send_message(f"Hello {interaction.user.mention}! Putin is not dead sadly.", ephemeral=False)
+
 @bot.command()
 async def info(ctx):
 
