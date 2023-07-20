@@ -22,7 +22,7 @@ async def on_ready():
 
     await bot.change_presence(activity = discord.Activity(
         type = discord.ActivityType.watching,
-        name = f'{servers} servers and {members} members' ### This shows the servers and members
+        name = f'{servers} servers and {members} members'
     ))
 
 
@@ -48,5 +48,31 @@ async def hello(interaction: discord.Interaction):
 async def info(ctx):
 
     await ctx.send(ctx.guild)
-    
+
+
+
+@bot.command() ## This is a poll function. To use it do !poll INSERT-TEXT yes no
+async def poll(ctx, question, option1=None, option2=None):
+  if option1==None and option2==None:
+    await ctx.channel.purge(limit=1)
+    message = await ctx.send(f"```New poll: \n{question}```\n**✅ = Yes**\n**❎ = No**")
+    await message.add_reaction('❎')
+    await message.add_reaction('✅')
+  elif option1==None:
+    await ctx.channel.purge(limit=1)
+    message = await ctx.send(f"```New poll: \n{question}```\n**✅ = {option1}**\n**❎ = No**")
+    await message.add_reaction('❎')
+    await message.add_reaction('✅')
+  elif option2==None:
+    await ctx.channel.purge(limit=1)
+    message = await ctx.send(f"```New poll: \n{question}```\n**✅ = Yes**\n**❎ = {option2}**")
+    await message.add_reaction('❎')
+    await message.add_reaction('✅')
+  else:
+    await ctx.channel.purge(limit=1)
+    message = await ctx.send(f"```New poll: \n{question}```\n**✅ = {option1}**\n**❎ = {option2}**")
+    await message.add_reaction('❎')
+    await message.add_reaction('✅')
+
+
 bot.run('INSERT_BOT_TOKEN_HERE')
