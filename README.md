@@ -17,3 +17,5 @@ https://discord.gg/ebcUZAmWGh
 **MK Ultra invite link**
 
 https://discord.com/api/oauth2/authorize?client_id=374134194563186709&permissions=8&scope=bot%20applications.commands
+
+Nick Matthews / Linux Panic
