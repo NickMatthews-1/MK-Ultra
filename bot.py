@@ -40,7 +40,7 @@ async def hello(interaction: discord.Interaction):
 async def say(interaction: discord.Interaction, thing_to_say: str):
     await interaction.response.send_message(f"{interaction.user.name} said: `{thing_to_say}`")
 
-@bot.tree.command(name="isputindead")
+@bot.tree.command(name="isputindead",description="I hope so!")
 async def hello(interaction: discord.Interaction):
     await interaction.response.send_message(f"Hello {interaction.user.mention}! Putin is not dead sadly.", ephemeral=False)
 
@@ -51,8 +51,8 @@ async def info(ctx):
 
 
 
-@bot.command() ## This is a poll function. To use it do !poll INSERT-TEXT yes no
-async def poll(ctx, question, option1=None, option2=None):
+@bot.command(name="poll", brief="Pokemon Go to the Polls", description="do !poll [insert-text] yes no to be able to use the poll command") ## This is a poll function. To use it do !poll INSERT-TEXT yes no
+async def poll(ctx, question="Put the question here with a - between words", option1="You choose", option2="You choose"):
   if option1==None and option2==None:
     await ctx.channel.purge(limit=1)
     message = await ctx.send(f"```New poll: \n{question}```\n**✅ = Yes**\n**❎ = No**")
@@ -74,5 +74,13 @@ async def poll(ctx, question, option1=None, option2=None):
     await message.add_reaction('❎')
     await message.add_reaction('✅')
 
+
+@bot.tree.command(name="avatar",description="Gets user avatar") ## This displays an avatar of a person selected by the user. Slash Command
+async def avatar(interaction:discord.Interaction,member:discord.Member):
+    await interaction.response.send_message(member.display_avatar)
+
+@bot.command(name="avatar",brief="Shows the users avatar" ,description="Gets the users avatar at full size") ## Not slash command
+async def av(ctx,member: discord.Member):
+    await ctx.send(member.display_avatar)
 
 bot.run('INSERT_BOT_TOKEN_HERE')
